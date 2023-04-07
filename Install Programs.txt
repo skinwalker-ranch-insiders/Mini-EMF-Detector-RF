@@ -1,0 +1,40 @@
+Installing Nginx on a Debian Pi:
+	sudo apt-get update
+	sudo apt-get upgrade
+	
+	sudo apt-get install nginx			(Webserver)
+	
+Installing PHP-FPM on a Debian Pi:
+	sudo apt-get php7.4-fpm
+	
+Configuring Nginx to work with PHP 7.4 FPM:
+	sudo nano /etc/nginx/sites-available/default
+	
+	Find the line that says the following:
+		index index.html index.htm index.nginx-debian.html;
+		
+	Add index.php after the word index.
+		index index.php index.html index.htm index.nginx-debian.html;
+		
+	Make sure the following lines are uncommented:
+		location / {
+				try_files $uri $uri/ =404;
+		}
+		
+	Remove the comment from the following lines:
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+		
+sudo nginx -t (This checks the nginx config files to make sure that are correct.)
+sudo systemctl restart nginx
+sudo chmod -R 777 /var/www/html	(This is where your index.php file will live.)
+sudo nano /var/www/html/index.php
+	<?php
+	phpinfo();
+	?>
+	
+	Save the file.
+
+Now you can go to web browser and go to your IP address of your Pi.
+You should get a PHP Version screen with all the info of the PHP server.
+Now you can make your own customize web page for your sensor.
