@@ -3,8 +3,8 @@ function get_EMF_reads($curr_wind)
 	{
 	$dbname         = "sensors";
 	$dbserver       = "localhost";
-	$dbuser         = "logger";
-	$dbpass         = "Tru$tN01123";
+	$dbuser         = "DB_USER";
+	$dbpass         = "DB_PASSWORD";
 
 	$DB_Link = new mysqli($dbserver, $dbuser, $dbpass, $dbname);
 	//echo $DB_Link->host_info . "<br>\n";
